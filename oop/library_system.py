@@ -6,6 +6,9 @@ class Book:
         self.title = title
         self.author = author
 
+    def __str__(self):
+        return f"Book: {self.title} by {self.author}"
+
 
 class EBook(Book):
     """Derived class representing an electronic book."""
@@ -13,12 +16,18 @@ class EBook(Book):
         super().__init__(title, author)
         self.file_size = file_size
 
+    def __str__(self):
+        return f"EBook: {self.title} by {self.author}, File Size: {self.file_size}KB"
+
 
 class PrintBook(Book):
     """Derived class representing a printed book."""
     def __init__(self, title: str, author: str, page_count: int):
         super().__init__(title, author)
         self.page_count = page_count
+
+    def __str__(self):
+        return f"PrintBook: {self.title} by {self.author}, Page Count: {self.page_count}"
 
 
 class Library:
@@ -31,14 +40,9 @@ class Library:
         self.books.append(book)
 
     def list_books(self):
-        """Print out details of all books in the library."""
+        """Print out details of all books in the library using their __str__ method."""
         for book in self.books:
-            if isinstance(book, EBook):
-                print(f"EBook: {book.title} by {book.author}, File Size: {book.file_size}KB")
-            elif isinstance(book, PrintBook):
-                print(f"PrintBook: {book.title} by {book.author}, Page Count: {book.page_count}")
-            else:
-                print(f"Book: {book.title} by {book.author}")
+            print(book)
 
 # main.py
 
@@ -51,7 +55,7 @@ def main():
     # Create instances of each type of Book
     classic_book = Book("Pride and Prejudice", "Jane Austen")
     digital_novel = EBook("Snow Crash", "Neal Stephenson", 512)
-    paper_novel = PrintBook("The catcher in the Rye", "J.D. Salinger", 234)
+    paper_novel = PrintBook("The Catcher in the Rye", "J.D. Salinger", 234)
 
     # Add books to the library
     library.add_book(classic_book)
