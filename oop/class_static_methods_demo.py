@@ -13,13 +13,24 @@ class Calculator:
         return a + b
 
     @classmethod
-    def multiply(cls, a: float, b: float) -> float:
+    def display_calculation_type(cls):
         """
-        Class method to multiply two numbers.
-        Prints the class attribute 'calculation_type' before performing multiplication.
+        Class method that prints the class attribute 'calculation_type'.
         """
-        print(f"Calculation type: {cls.calculation_type}")
-        return a * b
+        print(f"Calculation Type: {cls.calculation_type}")
+
+    @classmethod
+    def create_multiplier(cls, factor: float):
+        """
+        Factory-style class method that returns a function to multiply a value by the given factor.
+        Demonstrates usage of class context in a class method without calling it 'multiply'.
+        """
+        cls.display_calculation_type()  # Show the type before returning multiplier
+
+        def multiplier(value: float) -> float:
+            return value * factor
+
+        return multiplier
 
 
 # Demonstration script (for testing purposes)
@@ -28,6 +39,9 @@ if __name__ == "__main__":
     sum_result = Calculator.add(10, 5)
     print(f"Addition Result: {sum_result}")
 
-    # Using the class method
-    product_result = Calculator.multiply(10, 5)
-    print(f"Multiplication Result: {product_result}")
+    # Using a class method to get the calculation type
+    Calculator.display_calculation_type()
+
+    # Using another class method to create a multiplier function
+    times_two = Calculator.create_multiplier(2)
+    print(f"6 multiplied by 2 is: {times_two(6)}")
