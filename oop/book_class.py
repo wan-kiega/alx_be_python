@@ -39,3 +39,6 @@ if __name__ == "__main__":
     # Displaying __repr__ output
     print("\nOfficial representation:")
     print(repr(my_book))
+
+# Deleting the object to trigger __del__
+    del my_book
